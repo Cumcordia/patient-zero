@@ -50,7 +50,7 @@ Milliseconds, average of 3 runs, from `java -cp out Bench`.
 | KMP | 20 000 / 40 000 / 80 000 | 2,5 ms 1,2 ms 0,4 ms |
 | edit distance | 500 / 1000 / 2000 / 4000 | 6,2 ms 8,4 ms 14,4 ms 57,9 ms|
 
-What do the numbers say about how the time grows? When you double the size, by how much does each time grow? Two or three sentences.
+the numbers grows 4x time, O(n*m) or O(n^2), naive search is close to linear. We can also see jit warmup in kmp
 
 ## Complexity
 
