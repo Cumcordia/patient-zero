@@ -1,5 +1,7 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Missions 3 and 4. Find a word in a long text.
@@ -67,8 +69,52 @@ public class Marker {
      * can have the same hash.
      * Example: a = "ACGTAC", b = "TTACGT", k = 4: the words of a are ACGT, CGTA, GTAC; only ACGT is in b, so the answer is 1.
      */
+    private static final long MOD = 1_000_000_007L;
+    private static final long BASE = 131;
+    
+    private static long[] windowHashes(String s, int k){
+        int count = s.length() - k + 1;
+        long[] h = new long[count];
+        long pow = 1;
+        for(int i = 0; i < k - 1; i++){
+            pow = pow * BASE % MOD;
+        }
+        long current = 0;
+        for(int i = 0; i < k; i++){
+            current = (current * BASE + s.charAt(i)) % MOD;
+        }
+        h[0] = current;
+        for(int i = 1; i < count; i++){
+            current = (current - s.charAt(i - 1) * pow % MOD + MOD) % MOD;
+            current = (current * BASE + s.charAt(i + k - 1)) % MOD;
+            h[i] = current;
+        }
+        return h;
+    }
+    
     public static int sharedWords(String a, String b, int k) {
-        // TODO Mission 4
-        return -1;
+        if(k <= 0 || k > a.length() || k > b.length()){
+            return 0;
+        }
+        long[] ha = windowHashes(a, k);
+        long[] hb = windowHashes(b, k);
+        Map<Long, List<Integer>> map = new HashMap<>();
+        for(int j = 0; j < hb.length; j++){
+            map.computeIfAbsent(hb[j], x -> new ArrayList<>()).add(j);
+        }
+        int count = 0;
+        for(int i = 0; i < ha.length; i++){
+            List<Integer> cand = map.get(ha[i]);
+            if(cand == null){
+                continue;
+            }
+            for(int j : cand){
+                if(a.regionMatches(i, b, j, k)){
+                    count++;
+                    break;
+                }
+            }
+        }
+        return count;
     }
 }
