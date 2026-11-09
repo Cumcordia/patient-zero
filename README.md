@@ -1,10 +1,8 @@
 # Assignment 4. Patient Zero
 
-Student ID:
-Name:
-Group:
-
-This file is the report. Fill it in as you go. How to start: `START_HERE.md`. The task: `docs/Assignment4.pdf`.
+Student ID: 254605
+Name: Kassen Alikhan
+Group: SE 2540
 
 ## Program output
 
@@ -40,7 +38,7 @@ Mission 5. What are the two states of a person in your DP, and how do you get th
 
 ## AI use
 
-The syllabus requires you to say which AI tools you used and for what. Write the tool (ChatGPT, Copilot, other) and what you asked it: explain an idea, find an error, review code. Write "none" if you did not use any. If you took code or text from a book or a website, give the source here.
+Claude was used to review the code and for bug checking
 
 ## Timing (Mission 7)
 
